@@ -1,0 +1,93 @@
+/* ─── FloatingContactButton — prefixo fcb- ───────────────── */
+
+.fcb-root {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* ─── Botão genérico ─────────────────────────────────────── */
+.fcb-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.fcb-btn:active {
+  transform: scale(1) !important;
+}
+
+/* Tooltip */
+.fcb-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.fcb-btn:hover::after {
+  opacity: 1;
+}
+
+/* ─── WhatsApp ───────────────────────────────────────────── */
+.fcb-btn--wa {
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.fcb-btn--wa:hover {
+  background: #1ebe5d;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5), 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ─── E-mail ─────────────────────────────────────────────── */
+.fcb-btn--email {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.fcb-btn--email:hover {
+  background: #1d4ed8;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45), 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ─── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .fcb-root {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .fcb-btn {
+    width: 44px;
+    height: 44px;
+  }
+}

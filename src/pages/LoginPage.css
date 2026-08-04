@@ -1,0 +1,463 @@
+/* ─── LoginPage — estilos isolados (prefixo lp-) ─────────── */
+
+.lp-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #0b1120 0%, #0f1f3d 55%, #0d1628 100%);
+  padding: 24px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Brilhos decorativos de fundo */
+.lp-root::before,
+.lp-root::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lp-root::before {
+  width: 640px;
+  height: 640px;
+  top: -180px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, transparent 65%);
+}
+
+.lp-root::after {
+  width: 520px;
+  height: 520px;
+  bottom: -120px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.09) 0%, transparent 65%);
+}
+
+/* ─── Card ───────────────────────────────────────────────── */
+.lp-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 44px 44px 36px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Logo (usado nos modos de recuperação) ──────────────── */
+.lp-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.lp-logo-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+}
+
+.lp-logo-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Cabeçalho do formulário ────────────────────────────── */
+.lp-form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.lp-form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.lp-form-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ─── Formulário ─────────────────────────────────────────── */
+.lp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.lp-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lp-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Input com ícone */
+.lp-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lp-input-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lp-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px 0 42px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  font-family: inherit;
+}
+
+.lp-input::placeholder {
+  color: #94a3b8;
+}
+
+.lp-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+}
+
+.lp-input--password {
+  padding-right: 44px;
+}
+
+/* Botão olho (mostrar/ocultar senha) */
+.lp-eye-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+  line-height: 0;
+}
+
+.lp-eye-toggle:hover {
+  color: #475569;
+}
+
+/* ─── Linha "Lembrar-me" + "Esqueci" ─────────────────────── */
+.lp-remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lp-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.lp-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #2563eb;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.lp-checkbox-label {
+  font-size: 0.8125rem;
+  color: #374151;
+  user-select: none;
+}
+
+/* ─── Link "Esqueci minha senha" ─────────────────────────── */
+.lp-forgot-link {
+  font-size: 0.8125rem;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.lp-forgot-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ─── Botão principal ────────────────────────────────────── */
+.lp-btn-primary {
+  width: 100%;
+  height: 52px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  letter-spacing: -0.01em;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.lp-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.lp-btn-primary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.lp-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Divisor "ou" ───────────────────────────────────────── */
+.lp-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+  color: #94a3b8;
+  font-size: 0.8125rem;
+}
+
+.lp-divider::before,
+.lp-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+/* ─── Botão SSO (placeholder, desabilitado) ──────────────── */
+.lp-btn-sso {
+  width: 100%;
+  height: 52px;
+  background: #ffffff;
+  color: #374151;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Linha de contato ───────────────────────────────────── */
+.lp-contact-row {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 20px;
+}
+
+.lp-contact-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.lp-contact-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ─── Rodapé de segurança ────────────────────────────────── */
+.lp-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 20px;
+}
+
+/* ─── Botão voltar ───────────────────────────────────────── */
+.lp-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: #64748b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  margin-bottom: 20px;
+  transition: color 0.15s ease;
+}
+
+.lp-btn-back:hover {
+  color: #0f172a;
+}
+
+/* ─── Alertas ────────────────────────────────────────────── */
+.lp-alert {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.lp-alert--error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.lp-alert--success {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.lp-alert--info {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* ─── Input de código ────────────────────────────────────── */
+.lp-code-input {
+  width: 100%;
+  height: 64px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-align: center;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  font-family: inherit;
+}
+
+.lp-code-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+}
+
+/* ─── Reenvio de código ──────────────────────────────────── */
+.lp-resend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.875rem;
+}
+
+.lp-resend-label {
+  color: #64748b;
+}
+
+.lp-resend-btn {
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.lp-resend-btn:hover:not(:disabled) {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.lp-resend-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Dica de senha ──────────────────────────────────────── */
+.lp-password-hint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* ─── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .lp-card {
+    padding: 32px 24px 28px;
+    border-radius: 14px;
+  }
+}

@@ -1,0 +1,80 @@
+/* ─── WhatsApp Floating Button ──────────────────────────── */
+
+.wafb-root {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wafb-root:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5), 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.wafb-root:active {
+  transform: scale(1.04);
+}
+
+/* Tooltip */
+.wafb-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: #0f172a;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.wafb-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #0f172a;
+}
+
+.wafb-root:hover .wafb-tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .wafb-root {
+    bottom: 16px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .wafb-tooltip {
+    display: none;
+  }
+}

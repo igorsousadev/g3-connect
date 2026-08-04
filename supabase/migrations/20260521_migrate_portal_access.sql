@@ -1,0 +1,3 @@
+-- Migração cancelada: os campos de portal foram removidos da tabela company_contractors.
+-- O G3 Connect é o portal único de homologação documental.
+-- A tabela company_portal_access é preservada para consulta manual, mas não há dados a migrar.
