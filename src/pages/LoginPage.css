@@ -1,124 +1,230 @@
 /* ─── LoginPage — estilos isolados (prefixo lp-) ─────────── */
 
 .lp-root {
+  --lp-blue:        var(--primary, #2563eb);
+  --lp-blue-hover:  var(--primary-hover, #1d4ed8);
+  --lp-navy:        #0f172a;
+  --lp-blue-light:  #93c5fd;
+  --lp-text:        var(--text, #0f172a);
+  --lp-muted:       var(--text-muted, #64748b);
+  --lp-border:      var(--border, #e2e8f0);
+  --lp-surface:     #f8fafc;
+  --lp-error:       #dc2626;
+  --lp-focus-ring:  0 0 0 4px rgba(37, 99, 235, 0.14);
+  --lp-ease:        cubic-bezier(0.2, 0, 0, 1);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #0b1120 0%, #0f1f3d 55%, #0d1628 100%);
-  padding: 24px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100dvh;
+  background: var(--lp-surface);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
+  color: var(--lp-text);
+}
+
+/* ─── Painel institucional ───────────────────────────────── */
+.lp-aside {
   position: relative;
-}
-
-/* Brilhos decorativos de fundo */
-.lp-root::before,
-.lp-root::after {
-  content: '';
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.lp-root::before {
-  width: 640px;
-  height: 640px;
-  top: -180px;
-  left: -120px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, transparent 65%);
-}
-
-.lp-root::after {
-  width: 520px;
-  height: 520px;
-  bottom: -120px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.09) 0%, transparent 65%);
-}
-
-/* ─── Card ───────────────────────────────────────────────── */
-.lp-card {
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
-  padding: 44px 44px 36px;
-  width: 100%;
-  max-width: 480px;
-  box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.45),
-    0 8px 24px rgba(0, 0, 0, 0.25),
-    0 1px 0 rgba(255, 255, 255, 0.06);
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── Logo (usado nos modos de recuperação) ──────────────── */
-.lp-logo {
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 48px clamp(40px, 5vw, 72px);
+  color: #ffffff;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(96, 165, 250, 0.28) 0%, transparent 55%),
+    linear-gradient(135deg, #2563eb 0%, #1d4ed8 42%, #1e3a8a 72%, #0f172a 100%);
 }
 
-.lp-logo-badge {
-  width: 58px;
-  height: 58px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+/* Brilhos e anéis concêntricos */
+.lp-aside::before,
+.lp-aside::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lp-aside::before {
+  width: 560px;
+  height: 560px;
+  right: -220px;
+  bottom: -200px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 70px rgba(255, 255, 255, 0.025),
+    0 0 0 140px rgba(255, 255, 255, 0.02);
+}
+
+.lp-aside::after {
+  width: 260px;
+  height: 260px;
+  top: -90px;
+  right: 12%;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.22) 0%, transparent 70%);
+}
+
+.lp-aside-glow {
+  position: absolute;
+  inset: auto auto -30% -20%;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, transparent 65%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lp-aside-network {
+  position: absolute;
+  top: 50%;
+  right: -12%;
+  width: min(78%, 620px);
+  transform: translateY(-50%);
+  color: #ffffff;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lp-aside-content {
+  max-width: 520px;
+  margin-top: -4vh; /* levemente acima da linha central */
+}
+
+.lp-aside-title {
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+}
+
+.lp-aside-title-accent {
+  display: block;
+  color: #bfdbfe;
+}
+
+.lp-aside-text {
+  margin-top: 24px;
+  max-width: 460px;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.lp-aside-footer {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.66);
+  letter-spacing: 0.01em;
+}
+
+.lp-aside-footer strong {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ─── Marca (logo + nome) ────────────────────────────────── */
+.lp-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.lp-brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.lp-brand-name {
+  font-size: 1.25rem;
+}
+
+.lp-brand-mark--light {
+  color: #ffffff;
+}
+
+.lp-brand-mark--light .lp-brand-logo {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 3px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 8px 24px rgba(15, 23, 42, 0.25);
+}
+
+.lp-brand-mark--dark {
+  color: var(--lp-navy);
+}
+
+/* ─── Área de autenticação ───────────────────────────────── */
+.lp-main {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  padding: 48px clamp(24px, 5vw, 64px);
+  background: var(--lp-surface);
 }
 
-.lp-logo-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-  letter-spacing: -0.02em;
+.lp-panel {
+  width: 100%;
+  max-width: 420px;
+}
+
+.lp-mobile-brand {
+  display: none;
 }
 
 /* ─── Cabeçalho do formulário ────────────────────────────── */
 .lp-form-header {
-  text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .lp-form-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.75rem, 2.4vw, 2.0625rem);
   font-weight: 700;
-  color: #0f172a;
+  color: var(--lp-navy);
   letter-spacing: -0.03em;
-  margin-bottom: 6px;
+  line-height: 1.2;
+  margin-bottom: 10px;
 }
 
 .lp-form-subtitle {
-  font-size: 0.875rem;
-  color: #64748b;
-  line-height: 1.5;
+  font-size: 0.9375rem;
+  color: var(--lp-muted);
+  line-height: 1.55;
+}
+
+.lp-form-subtitle strong {
+  color: var(--lp-text);
+  font-weight: 600;
+  word-break: break-all;
 }
 
 /* ─── Formulário ─────────────────────────────────────────── */
 .lp-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .lp-form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .lp-label {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #374151;
+  color: #334155;
 }
 
 /* Input com ícone */
@@ -130,7 +236,7 @@
 
 .lp-input-icon {
   position: absolute;
-  left: 13px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -138,19 +244,25 @@
   color: #94a3b8;
   pointer-events: none;
   z-index: 1;
+  transition: color 0.18s var(--lp-ease);
+}
+
+.lp-input-wrapper:focus-within .lp-input-icon {
+  color: var(--lp-blue);
 }
 
 .lp-input {
   width: 100%;
-  height: 52px;
-  padding: 0 14px 0 42px;
-  border: 1.5px solid #e2e8f0;
+  height: 50px;
+  padding: 0 14px 0 44px;
+  border: 1px solid var(--lp-border);
   border-radius: 10px;
-  font-size: 0.9375rem;
-  color: #0f172a;
-  background: #f8fafc;
+  font-size: 1rem; /* 16px evita zoom automático no iOS */
+  color: var(--lp-text);
+  background: #ffffff;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.18s var(--lp-ease), box-shadow 0.18s var(--lp-ease);
   font-family: inherit;
 }
 
@@ -158,36 +270,59 @@
   color: #94a3b8;
 }
 
+.lp-input:hover {
+  border-color: #cbd5e1;
+}
+
 .lp-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-  background: #ffffff;
+  border-color: var(--lp-blue);
+  box-shadow: var(--lp-focus-ring);
+}
+
+/* Estado inválido: erro de autenticação ou campo preenchido incorretamente */
+.lp-input[aria-invalid='true'],
+.lp-input:user-invalid {
+  border-color: var(--lp-error);
+}
+
+.lp-input[aria-invalid='true']:focus,
+.lp-input:user-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
 }
 
 .lp-input--password {
-  padding-right: 44px;
+  padding-right: 52px;
 }
 
 /* Botão olho (mostrar/ocultar senha) */
 .lp-eye-toggle {
   position: absolute;
-  right: 12px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #94a3b8;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  padding: 4px;
-  border-radius: 4px;
-  transition: color 0.15s ease;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: color 0.18s var(--lp-ease), background 0.18s var(--lp-ease);
   line-height: 0;
 }
 
 .lp-eye-toggle:hover {
   color: #475569;
+  background: #f1f5f9;
+}
+
+.lp-eye-toggle:focus-visible {
+  outline: 2px solid var(--lp-blue);
+  outline-offset: -2px;
+  color: var(--lp-blue);
 }
 
 /* ─── Linha "Lembrar-me" + "Esqueci" ─────────────────────── */
@@ -195,138 +330,166 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: -4px;
 }
 
 .lp-checkbox-wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-height: 32px;
   cursor: pointer;
 }
 
 .lp-checkbox {
-  width: 16px;
-  height: 16px;
-  accent-color: #2563eb;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 5px;
+  background: #ffffff center / 12px 12px no-repeat;
   cursor: pointer;
   flex-shrink: 0;
+  transition: background-color 0.15s var(--lp-ease), border-color 0.15s var(--lp-ease);
+}
+
+.lp-checkbox:hover {
+  border-color: var(--lp-blue);
+}
+
+.lp-checkbox:checked {
+  background-color: var(--lp-blue);
+  border-color: var(--lp-blue);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+
+.lp-checkbox:focus-visible {
+  outline: none;
+  box-shadow: var(--lp-focus-ring);
+  border-color: var(--lp-blue);
 }
 
 .lp-checkbox-label {
-  font-size: 0.8125rem;
-  color: #374151;
+  font-size: 0.875rem;
+  color: #334155;
   user-select: none;
 }
 
-/* ─── Link "Esqueci minha senha" ─────────────────────────── */
-.lp-forgot-link {
-  font-size: 0.8125rem;
-  color: #2563eb;
+/* ─── Links de texto (esqueci / contato / reenviar) ──────── */
+.lp-forgot-link,
+.lp-contact-link,
+.lp-resend-btn {
+  color: var(--lp-blue);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.18s var(--lp-ease);
+}
+
+.lp-forgot-link,
+.lp-resend-btn {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   font-family: inherit;
-  line-height: 1;
-  transition: color 0.15s ease;
+  font-size: 0.875rem;
 }
 
-.lp-forgot-link:hover {
-  color: #1d4ed8;
+.lp-forgot-link {
+  min-height: 32px;
+}
+
+.lp-forgot-link:hover,
+.lp-contact-link:hover,
+.lp-resend-btn:hover:not(:disabled) {
+  color: var(--lp-blue-hover);
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lp-forgot-link:focus-visible,
+.lp-contact-link:focus-visible,
+.lp-resend-btn:focus-visible,
+.lp-btn-back:focus-visible {
+  outline: 2px solid var(--lp-blue);
+  outline-offset: 3px;
 }
 
 /* ─── Botão principal ────────────────────────────────────── */
 .lp-btn-primary {
   width: 100%;
   height: 52px;
-  background: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-  letter-spacing: -0.01em;
   margin-top: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  gap: 10px;
+  background: var(--lp-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12), 0 6px 16px -4px rgba(37, 99, 235, 0.45);
+  transition: background 0.18s var(--lp-ease), box-shadow 0.18s var(--lp-ease), transform 0.12s var(--lp-ease);
+}
+
+.lp-btn-primary svg {
+  transition: transform 0.18s var(--lp-ease);
 }
 
 .lp-btn-primary:hover:not(:disabled) {
-  background: #1d4ed8;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  background: var(--lp-blue-hover);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12), 0 10px 22px -6px rgba(29, 78, 216, 0.55);
+}
+
+.lp-btn-primary:hover:not(:disabled) svg {
+  transform: translateX(2px);
 }
 
 .lp-btn-primary:active:not(:disabled) {
-  transform: scale(0.99);
+  transform: translateY(1px);
+}
+
+.lp-btn-primary:focus-visible {
+  outline: 2px solid var(--lp-blue);
+  outline-offset: 3px;
 }
 
 .lp-btn-primary:disabled {
-  opacity: 0.6;
+  background: #93b4f5;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
-/* ─── Divisor "ou" ───────────────────────────────────────── */
-.lp-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0 16px;
-  color: #94a3b8;
-  font-size: 0.8125rem;
+/* Indicador de carregamento */
+.lp-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  animation: lp-spin 0.7s linear infinite;
 }
 
-.lp-divider::before,
-.lp-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #e5e7eb;
-}
-
-/* ─── Botão SSO (placeholder, desabilitado) ──────────────── */
-.lp-btn-sso {
-  width: 100%;
-  height: 52px;
-  background: #ffffff;
-  color: #374151;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0.6;
-  cursor: not-allowed;
+@keyframes lp-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ─── Linha de contato ───────────────────────────────────── */
 .lp-contact-row {
   text-align: center;
   font-size: 0.875rem;
-  color: #64748b;
-  margin-top: 20px;
-}
-
-.lp-contact-link {
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.15s ease;
-}
-
-.lp-contact-link:hover {
-  color: #1d4ed8;
-  text-decoration: underline;
+  color: var(--lp-muted);
+  margin-top: 28px;
 }
 
 /* ─── Rodapé de segurança ────────────────────────────────── */
@@ -334,12 +497,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 0.75rem;
+  gap: 8px;
+  font-size: 0.8125rem;
   color: #94a3b8;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--lp-border);
+  margin-top: 28px;
+}
+
+.lp-security svg {
+  color: #22c55e;
+  flex-shrink: 0;
 }
 
 /* ─── Botão voltar ───────────────────────────────────────── */
@@ -347,68 +515,77 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8125rem;
-  color: #64748b;
+  min-height: 32px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lp-muted);
   background: none;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   padding: 0;
   font-family: inherit;
   margin-bottom: 20px;
-  transition: color 0.15s ease;
+  transition: color 0.18s var(--lp-ease);
 }
 
 .lp-btn-back:hover {
-  color: #0f172a;
+  color: var(--lp-navy);
 }
 
 /* ─── Alertas ────────────────────────────────────────────── */
 .lp-alert {
   padding: 12px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.875rem;
   line-height: 1.5;
+  border: 1px solid transparent;
+  border-left-width: 3px;
 }
 
 .lp-alert--error {
   background: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-color: #fecaca;
+  border-left-color: var(--lp-error);
 }
 
 .lp-alert--success {
   background: #f0fdf4;
-  color: #16a34a;
-  border: 1px solid #bbf7d0;
+  color: #15803d;
+  border-color: #bbf7d0;
+  border-left-color: #16a34a;
 }
 
 .lp-alert--info {
   background: #eff6ff;
   color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  border-color: #bfdbfe;
+  border-left-color: var(--lp-blue);
 }
 
 /* ─── Input de código ────────────────────────────────────── */
 .lp-code-input {
   width: 100%;
   height: 64px;
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid var(--lp-border);
   border-radius: 10px;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: 0.5em;
+  text-indent: 0.5em; /* compensa o espaçamento do último dígito */
   text-align: center;
-  color: #0f172a;
-  background: #f8fafc;
+  color: var(--lp-navy);
+  background: #ffffff;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.18s var(--lp-ease), box-shadow 0.18s var(--lp-ease);
   font-family: inherit;
 }
 
 .lp-code-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-  background: #ffffff;
+  border-color: var(--lp-blue);
+  box-shadow: var(--lp-focus-ring);
 }
 
 /* ─── Reenvio de código ──────────────────────────────────── */
@@ -416,30 +593,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 6px;
-  margin-top: 16px;
+  margin-top: 20px;
   font-size: 0.875rem;
 }
 
 .lp-resend-label {
-  color: #64748b;
-}
-
-.lp-resend-btn {
-  color: #2563eb;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 500;
-  padding: 0;
-  transition: color 0.15s ease;
-}
-
-.lp-resend-btn:hover:not(:disabled) {
-  color: #1d4ed8;
-  text-decoration: underline;
+  color: var(--lp-muted);
 }
 
 .lp-resend-btn:disabled {
@@ -451,13 +612,107 @@
 .lp-password-hint {
   font-size: 0.75rem;
   color: #94a3b8;
-  margin-top: 2px;
 }
 
 /* ─── Responsivo ─────────────────────────────────────────── */
-@media (max-width: 520px) {
-  .lp-card {
-    padding: 32px 24px 28px;
-    border-radius: 14px;
+
+/* Tablet: duas colunas com painel institucional mais estreito */
+@media (max-width: 1100px) {
+  .lp-root {
+    grid-template-columns: 5fr 6fr;
+  }
+
+  .lp-aside {
+    padding: 40px 40px;
+  }
+
+  .lp-aside-title {
+    font-size: clamp(2rem, 3.6vw, 2.5rem);
+  }
+
+  .lp-aside-text {
+    font-size: 1rem;
+  }
+}
+
+/* Uma coluna: formulário em destaque, painel institucional oculto */
+@media (max-width: 880px) {
+  .lp-root {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-aside {
+    display: none;
+  }
+
+  .lp-main {
+    align-items: flex-start;
+    padding: 40px 24px 96px; /* espaço inferior para os botões flutuantes */
+    background:
+      radial-gradient(90% 40% at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 70%),
+      var(--lp-surface);
+  }
+
+  .lp-panel {
+    margin: auto 0;
+  }
+
+  .lp-mobile-brand {
+    display: flex;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lp-main {
+    padding: 28px 16px 92px;
+  }
+
+  .lp-mobile-brand {
+    margin-bottom: 28px;
+  }
+
+  .lp-brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lp-brand-name {
+    font-size: 1.125rem;
+  }
+
+  .lp-form-header {
+    margin-bottom: 24px;
+  }
+
+  .lp-form-title {
+    font-size: 1.625rem;
+  }
+}
+
+/* Viewports baixos (paisagem em celulares / teclado aberto) */
+@media (max-height: 640px) and (max-width: 880px) {
+  .lp-main {
+    padding-top: 20px;
+  }
+
+  .lp-mobile-brand {
+    margin-bottom: 20px;
+  }
+
+  .lp-form-header {
+    margin-bottom: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-root *,
+  .lp-root *::before,
+  .lp-root *::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .lp-spinner {
+    animation-duration: 1.6s;
   }
 }

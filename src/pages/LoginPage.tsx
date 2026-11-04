@@ -11,18 +11,6 @@ const supportEmail = import.meta.env.VITE_SUPPORT_EMAIL || ''
 type Mode = 'login' | 'forgot-email' | 'forgot-code' | 'forgot-password'
 
 // ── Ícones inline ────────────────────────────────────────────
-function IconDoc() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" />
-      <line x1="16" y1="17" x2="8" y2="17" />
-      <polyline points="10 9 9 9 8 9" />
-    </svg>
-  )
-}
-
 function IconEmail() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -79,8 +67,52 @@ function IconChevronLeft() {
 
 function IconShieldSmall() {
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  )
+}
+
+// Marca: logotipo oficial + nome da aplicação
+function Brand({ variant }: { variant: 'light' | 'dark' }) {
+  return (
+    <span className={`lp-brand-mark lp-brand-mark--${variant}`}>
+      <img src="/favicon.png" alt="" className="lp-brand-logo" aria-hidden="true" />
+      <span className="lp-brand-name">{appName}</span>
+    </span>
+  )
+}
+
+// Composição decorativa do painel institucional (rede de conexões em SVG leve)
+function BrandDecoration() {
+  return (
+    <svg className="lp-aside-network" viewBox="0 0 600 600" fill="none" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" strokeWidth="1">
+        <line x1="80" y1="120" x2="220" y2="70" />
+        <line x1="220" y1="70" x2="360" y2="160" />
+        <line x1="360" y1="160" x2="510" y2="90" />
+        <line x1="220" y1="70" x2="250" y2="250" />
+        <line x1="360" y1="160" x2="250" y2="250" />
+        <line x1="360" y1="160" x2="470" y2="300" />
+        <line x1="250" y1="250" x2="120" y2="340" />
+        <line x1="250" y1="250" x2="380" y2="400" />
+        <line x1="470" y1="300" x2="380" y2="400" />
+        <line x1="120" y1="340" x2="210" y2="500" />
+        <line x1="380" y1="400" x2="210" y2="500" />
+        <line x1="380" y1="400" x2="530" y2="520" />
+      </g>
+      <g fill="currentColor">
+        <circle cx="80" cy="120" r="3" />
+        <circle cx="220" cy="70" r="4" />
+        <circle cx="360" cy="160" r="5" />
+        <circle cx="510" cy="90" r="3" />
+        <circle cx="250" cy="250" r="6" />
+        <circle cx="470" cy="300" r="4" />
+        <circle cx="120" cy="340" r="3" />
+        <circle cx="380" cy="400" r="5" />
+        <circle cx="210" cy="500" r="4" />
+        <circle cx="530" cy="520" r="3" />
+      </g>
     </svg>
   )
 }
@@ -309,29 +341,52 @@ export function LoginPage() {
   // ── Render ─────────────────────────────────────────────────
   return (
     <div className="lp-root">
-      <div className="lp-card">
-        {/* Logo — exibido apenas nos modos de recuperação */}
-        {mode !== 'login' && (
-          <div className="lp-logo">
-            <div className="lp-logo-badge"><IconDoc /></div>
-            <span className="lp-logo-name">{appName}</span>
-          </div>
-        )}
+      {/* ── Painel institucional (desktop/tablet) ─────────── */}
+      <aside className="lp-aside">
+        <div className="lp-aside-glow" aria-hidden="true" />
+        <BrandDecoration />
+
+        <div className="lp-aside-top">
+          <Brand variant="light" />
+        </div>
+
+        <div className="lp-aside-content">
+          <h2 className="lp-aside-title">
+            Gestão inteligente.
+            <span className="lp-aside-title-accent">Processos conectados.</span>
+          </h2>
+          <p className="lp-aside-text">
+            Centralize informações, simplifique processos e tenha mais controle em uma única plataforma.
+          </p>
+        </div>
+
+        <p className="lp-aside-footer">
+          <strong>{appName}</strong> — Gestão documental e homologação de terceiros
+        </p>
+      </aside>
+
+      {/* ── Área de autenticação ───────────────────────────── */}
+      <main className="lp-main">
+      <div className="lp-panel">
+        {/* Marca — exibida apenas quando o painel institucional está oculto (mobile) */}
+        <div className="lp-mobile-brand">
+          <Brand variant="dark" />
+        </div>
 
         {/* ── Modo: login ───────────────────────────────────── */}
         {mode === 'login' && (
           <>
             <div className="lp-form-header">
-              <h1 className="lp-form-title">Bem-vindo de volta! 👋</h1>
-              <p className="lp-form-subtitle">Faça login para acessar sua conta</p>
+              <h1 className="lp-form-title">Bem-vindo de volta!</h1>
+              <p className="lp-form-subtitle">Entre com suas credenciais para acessar o {appName}.</p>
             </div>
 
             <form className="lp-form" onSubmit={handleLogin}>
               {loginSuccess && (
-                <div className="lp-alert lp-alert--success">{loginSuccess}</div>
+                <div className="lp-alert lp-alert--success" role="status">{loginSuccess}</div>
               )}
               {loginError && (
-                <div className="lp-alert lp-alert--error">{loginError}</div>
+                <div className="lp-alert lp-alert--error" role="alert" id="login-error">{loginError}</div>
               )}
 
               <div className="lp-form-group">
@@ -348,6 +403,8 @@ export function LoginPage() {
                     required
                     autoComplete="email"
                     autoFocus
+                    aria-invalid={loginError ? true : undefined}
+                    aria-describedby={loginError ? 'login-error' : undefined}
                   />
                 </div>
               </div>
@@ -365,13 +422,15 @@ export function LoginPage() {
                     onChange={e => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
+                    aria-invalid={loginError ? true : undefined}
+                    aria-describedby={loginError ? 'login-error' : undefined}
                   />
                   <button
                     type="button"
                     className="lp-eye-toggle"
                     onClick={() => setShowPwd(v => !v)}
-                    tabIndex={-1}
                     aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                    aria-pressed={showPassword}
                   >
                     {showPassword ? <IconEyeOff /> : <IconEye />}
                   </button>
@@ -393,9 +452,10 @@ export function LoginPage() {
                 </button>
               </div>
 
-              <button type="submit" className="lp-btn-primary" disabled={loading}>
-                {!loading && <IconArrow />}
+              <button type="submit" className="lp-btn-primary" disabled={loading} aria-busy={loading}>
+                {loading && <span className="lp-spinner" aria-hidden="true" />}
                 {loading ? 'Entrando...' : 'Entrar'}
+                {!loading && <IconArrow />}
               </button>
             </form>
 
@@ -413,7 +473,7 @@ export function LoginPage() {
 
             <div className="lp-security">
               <IconShieldSmall />
-              Seus dados estão protegidos com segurança
+              Seus dados estão protegidos com segurança.
             </div>
           </>
         )}
@@ -433,7 +493,7 @@ export function LoginPage() {
 
             <form className="lp-form" onSubmit={handleForgotEmail}>
               {resetError && (
-                <div className="lp-alert lp-alert--error">{resetError}</div>
+                <div className="lp-alert lp-alert--error" role="alert">{resetError}</div>
               )}
 
               <div className="lp-form-group">
@@ -478,10 +538,10 @@ export function LoginPage() {
 
             <form className="lp-form" onSubmit={handleVerifyCode}>
               {resetInfo && (
-                <div className="lp-alert lp-alert--info">{resetInfo}</div>
+                <div className="lp-alert lp-alert--info" role="status">{resetInfo}</div>
               )}
               {resetError && (
-                <div className="lp-alert lp-alert--error">{resetError}</div>
+                <div className="lp-alert lp-alert--error" role="alert">{resetError}</div>
               )}
 
               <div className="lp-form-group">
@@ -532,7 +592,7 @@ export function LoginPage() {
 
             <form className="lp-form" onSubmit={handleConfirmNewPassword}>
               {resetError && (
-                <div className="lp-alert lp-alert--error">{resetError}</div>
+                <div className="lp-alert lp-alert--error" role="alert">{resetError}</div>
               )}
 
               <div className="lp-form-group">
@@ -554,7 +614,6 @@ export function LoginPage() {
                     type="button"
                     className="lp-eye-toggle"
                     onClick={() => setShowNewPwd(v => !v)}
-                    tabIndex={-1}
                     aria-label={showNewPwd ? 'Ocultar senha' : 'Mostrar senha'}
                   >
                     {showNewPwd ? <IconEyeOff /> : <IconEye />}
@@ -581,7 +640,6 @@ export function LoginPage() {
                     type="button"
                     className="lp-eye-toggle"
                     onClick={() => setShowConfirmPwd(v => !v)}
-                    tabIndex={-1}
                     aria-label={showConfirmPwd ? 'Ocultar senha' : 'Mostrar senha'}
                   >
                     {showConfirmPwd ? <IconEyeOff /> : <IconEye />}
@@ -597,6 +655,7 @@ export function LoginPage() {
           </>
         )}
       </div>
+      </main>
 
       <FloatingContactButton />
     </div>
